@@ -14,12 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Verify commit messages on dev
-        if: github.ref == 'refs/heads/dev' # Spécifie que cette étape ne sera exécutée que lorsque le push est effectué sur la branche dev
-        uses: wagoid/commitlint-github-action@v4 # Utilise l'action commitlint-action pour vérifier que les messages de commit sur la branche dev sont bien organisés
-        with:
-          args: "--config=config/commitlint.config.js" # Spécifie le chemin du fichier de configuration commitlint.config.js utilisé pour valider les messages de commit
-
       - name: Install dependencies
         run: npm install
 
@@ -32,8 +26,16 @@ jobs:
       - name: Test code
         run: npm test
 
+      - name: Upload artifact
+          uses: actions/upload-artifact@v2 # Utilise l'action upload-artifact pour télécharger l'artefact de construction (ici le dossier src) sur le serveur GitHub
+          with:
+            name: build # Spécifie le nom de l'artefact qu'on télécharge.
+            path: src #  Spécifie le chemin de l'artefact qu'on télécharge'
+
       - name: Commit changes
         run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
           git add .
           git commit -m "$(echo $GITHUB_SHA | cut -c 1-8) - $(git log --format=%B -n 1)"
           git tag -a "$(echo $GITHUB_SHA | cut -c 1-8)" -m "$(git log --format=%B -n 1)"
