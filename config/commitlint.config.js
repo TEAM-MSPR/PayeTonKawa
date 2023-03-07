@@ -15,6 +15,6 @@ module.exports = {
       //"revert" pour un commit qui annule les modifications précédentes.
     ],
     'subject-empty': [2, 'never'], //interdit les messages de commit vides
-    'subject-max-length': [2, '100'], // limite la longueur maximale de la description à 100 caractères
+    'subject-max-length': [2, '500'], // limite la longueur maximale de la description à 100 caractères
   },
 };
