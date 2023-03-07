@@ -16,7 +16,7 @@ jobs:
 
       - name: Verify commit messages on dev
         if: github.ref == 'refs/heads/dev' # Spécifie que cette étape ne sera exécutée que lorsque le push est effectué sur la branche dev
-        uses: endersonmenezes/commitlint-action@v1 # Utilise l'action commitlint-action pour vérifier que les messages de commit sur la branche dev sont bien organisés
+        uses: wagoid/commitlint-github-action@v4 # Utilise l'action commitlint-action pour vérifier que les messages de commit sur la branche dev sont bien organisés
         with:
           args: "--config=config/commitlint.config.js" # Spécifie le chemin du fichier de configuration commitlint.config.js utilisé pour valider les messages de commit
 
