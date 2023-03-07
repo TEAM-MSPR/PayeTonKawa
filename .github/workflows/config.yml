@@ -29,7 +29,8 @@ jobs:
           path: src #  Spécifie le chemin de l'artefact qu'on télécharge
 
       - name: Commit changes
-        run: |
+        run:
+          command: |
           git config --global user.email "quentin.quero22@gmail.com"
           git config --global user.name "QuentinQ22"
           git add .
