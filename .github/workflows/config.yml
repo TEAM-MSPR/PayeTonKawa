@@ -28,11 +28,29 @@ jobs:
           name: build # Spécifie le nom de l'artefact qu'on télécharge
           path: src #  Spécifie le chemin de l'artefact qu'on télécharge
 
-      - name: Commit changes
-        run: |
-          git config --global user.email "quentin.quero22@gmail.com"
-          git config --global user.name "QuentinQ22"
-          git add .
-          git commit -m "$(echo $GITHUB_SHA | cut -c 1-8) - $(git log --format=%B -n 1)"
-          git tag -a "$(echo $GITHUB_SHA | cut -c 1-8)" -m "$(git log --format=%B -n 1)"
-          git push --follow-tags
+      - run:
+          name: Success
+          command : |
+            git config --global user.email "quentin.quero22@gmail.com"
+            git config --global user.name "QuentinQ22"
+            git fetch --all
+            git checkout main
+            git pull
+            git merge origin/dev --no-edit
+            git push origin
+          when: on_success
+
+      - run:
+          name: rejected
+          command: |
+            git config --global user.email "quentin.quero22@gmail.com"
+            git config --global user.name "QuentinQ22"
+            git checkout -b rejected
+            git add .
+            git commit -m "ON FAIL"
+            git push --set-upstream origin rejected
+            git checkout dev
+            git reset --hard HEAD^
+          when: on_fail
+
+
