@@ -19,7 +19,6 @@ const setClients = async (req, res) => {
     }).catch(error => {
         res.send('Erreur : ' + error);
     });
-
 }
 
 module.exports = {

@@ -12,7 +12,7 @@ module.exports = {
       //"refactor" pour une modification de refactoring
       //"test" pour une modification de test
       //"chore" pour une modification qui n'affecte pas le code, comme la mise à jour de la configuration
-      //"revert" pour un commit qui annule les modifications précédentes.
+      //"revert" pour un commit qui annule les modifications précédentes
     ],
     'subject-empty': [2, 'never'], //interdit les messages de commit vides
     'subject-max-length': [2, '100'], // limite la longueur maximale de la description à 100 caractères
