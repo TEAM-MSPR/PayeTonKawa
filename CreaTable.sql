@@ -49,15 +49,13 @@ CREATE TABLE public.entreprise (
 	CONSTRAINT entreprise_pk PRIMARY KEY (id)
 );
 
-CREATE TABLE public.commande (
-	id varchar NOT NULL,
-	"id-produit" varchar NOT NULL,
-	"id-revendeur" varchar NOT NULL,
-	"id-client" varchar NOT NULL,
-	CONSTRAINT commande_pk PRIMARY KEY (id),
-	CONSTRAINT commande_fk FOREIGN KEY ("id-produit") REFERENCES public.produit(id),
-	CONSTRAINT commande_fk_1 FOREIGN KEY ("id-revendeur") REFERENCES public.revendeur(id),
-	CONSTRAINT commande_fk_2 FOREIGN KEY ("id-client") REFERENCES public.client(id)
+CREATE TABLE public.infos_commande (
+	num_commande varchar NOT NULL,
+	num_produit varchar NULL,
+	quantité int4 NULL,
+	CONSTRAINT infos_commande_pk PRIMARY KEY (num_commande),
+	CONSTRAINT infos_commande_fk FOREIGN KEY (num_commande) REFERENCES public.commande(id),
+	CONSTRAINT infos_commande_fk_1 FOREIGN KEY (num_produit) REFERENCES public.produit(id)
 );
 
 CREATE TABLE public.catalogue_revendeur (
