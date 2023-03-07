@@ -35,6 +35,5 @@ jobs:
       - name: Commit changes
         run: |
           git add .
-          git commit -m "$(echo $GITHUB_SHA | cut -c 1-8) - $(git log --format=%B -n 1)"
-          git tag -a "$(echo $GITHUB_SHA | cut -c 1-8)" -m "$(git log --format=%B -n 1)"
-          git push --follow-tags
+          git commit -m "Test"
+          git push
