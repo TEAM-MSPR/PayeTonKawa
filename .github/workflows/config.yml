@@ -28,14 +28,12 @@ jobs:
           name: build # Spécifie le nom de l'artefact qu'on télécharge
           path: src #  Spécifie le chemin de l'artefact qu'on télécharge
 
-      - name:
-          run : |
-            git config --global user.email "quentin.quero22@gmail.com"
-            git config --global user.name "QuentinQ22"
-            git fetch --all
-            git checkout main
-            git pull
-            git merge origin/dev --no-edit
-            git push origin
-
-
+      - name: Commit changes
+        run: |
+          git config --global user.email "quentin.quero22@gmail.com"
+          git config --global user.name "QuentinQ22"
+          git fetch --all
+          git checkout main
+          git pull
+          git merge origin/dev --no-edit
+          git push origin
