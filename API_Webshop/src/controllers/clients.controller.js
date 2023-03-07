@@ -16,7 +16,7 @@ const getTest =  (req, res) => {
 const setClients = async (req, res) => {
     const { id, nom, prenom, mail, pseudo, telephone } = req.body;
     await pool.query('INSERT INTO client VALUES ($1, $2, $3, $4, $5, $6)', [id, nom, prenom, mail, pseudo, telephone]);
-    res.send('client cree');
+    res.send('client crée');
 }
 
 
