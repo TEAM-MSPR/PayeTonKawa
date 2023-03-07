@@ -27,10 +27,10 @@ jobs:
         run: npm test
 
       - name: Upload artifact
-          uses: actions/upload-artifact@v2 # Utilise l'action upload-artifact pour télécharger l'artefact de construction (ici le dossier src) sur le serveur GitHub
-          with:
-            name: build # Spécifie le nom de l'artefact qu'on télécharge.
-            path: src #  Spécifie le chemin de l'artefact qu'on télécharge'
+        uses: actions/upload-artifact@v2 # Utilise l'action upload-artifact pour télécharger l'artefact de construction (ici le dossier src) sur le serveur GitHub
+        with:
+          name: build # Spécifie le nom de l'artefact qu'on télécharge
+          path: src #  Spécifie le chemin de l'artefact qu'on télécharge
 
       - name: Commit changes
         run: |
