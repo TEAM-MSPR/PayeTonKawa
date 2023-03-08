@@ -21,10 +21,10 @@ jobs:
         run: npm install
       - name: Install commitlint
         working-directory: ./API_Webshop
-        run: npm install --save-dev @commitlint/cli @commitlint/config-conventional
+        run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
       - name: Install Husky
         working-directory: ./API_Webshop
-        run: npm install husky --save-dev
+        run: npm install husky@7 --save-dev
       - name: Lint commits
         working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
         run: npm run commitmsg
