@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "build": "",
-    "test": ""
+    "test": "",
+    "lint-commits": "commitlint --from=HEAD~1"
   },
   "keywords": [],
   "author": "",
