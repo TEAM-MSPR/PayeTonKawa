@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "build": "",
-    "test": "",
-    "lint-commits": "commitlint --from=HEAD"
+    "test": ""
   },
   "keywords": [],
   "author": "",
@@ -17,6 +16,8 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.21",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4"
   }
 }
