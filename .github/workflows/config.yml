@@ -24,4 +24,4 @@ jobs:
         run: npm install --save-dev @commitlint/cli @commitlint/config-conventional
       - name: Lint commits
         working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
-        run: npm run lint-commits
+        run: npm run commitmsg
