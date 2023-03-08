@@ -17,6 +17,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install dependencies
+        working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
         run: npm install
       - name: Lint commits
+        working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
         run: npm run lint-commits
