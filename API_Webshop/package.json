@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
     "build": "",
     "test": ""
   },
@@ -17,8 +16,13 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
-    "nodemon": "^2.0.21"
+    "@commitlint/cli": "^14.2.2",
+    "@commitlint/config-conventional": "^14.2.1",
+    "husky": "^7.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
