@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
-        run: npm instagit
+        run: npm install
       - name: Install commitlint
         working-directory: ./API_Webshop
         run: npm install --save-dev @commitlint/cli @commitlint/config-conventional
