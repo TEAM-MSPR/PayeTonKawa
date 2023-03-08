@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "commitlint": "commitlint -e",
+    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
     "build": "",
     "test": ""
   },
@@ -17,8 +17,8 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21",
     "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4"
+    "@commitlint/config-conventional": "^12.1.4",
+    "nodemon": "^2.0.21"
   }
 }
