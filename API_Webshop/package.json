@@ -16,9 +16,9 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^14.2.2",
-    "@commitlint/config-conventional": "^14.2.1",
-    "husky": "^7.0.4"
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "husky": "^8.0.3"
   },
   "husky": {
     "hooks": {
