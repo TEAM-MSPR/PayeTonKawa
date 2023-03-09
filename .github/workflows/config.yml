@@ -20,11 +20,11 @@ jobs:
         run: npm install husky --save-dev
       - name: active les hooks
         run: npx husky install
+      - name: Ajout script
+        run: npm set-script prepare "husky install"
       - name: Install dependencies
         working-directory: ./API_Webshop
         run: npm install
-      - name: Ajout script
-        run : npm set-script prepare "husky install"
       - name: Install commitlint
         run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
       - name: Ajout hook
