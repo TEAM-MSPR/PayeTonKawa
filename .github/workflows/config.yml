@@ -19,9 +19,14 @@ jobs:
       - name: Install dependencies
         working-directory: ./API_Webshop
         run: npm install
+      - name: Install husky
+        run : npm install husky --save-dev
+      - name: active les hooks
+        run : npx husky install
+      - name: Ajout script
+        working-directory: ./API_Webshop
+        run : npm set-script prepare "husky install"
       - name: Install commitlint
         run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
-      - name: Lint commits
-        run: |
-          git log --format=%s ${{ github.event.before }}..${{ github.event.after }}
-          npx commitlint --from ${{ github.event.before }} --to ${{ github.event.after }}
+      - name: Ajout hook
+        run : npx husky add .husky/commit-msg  "npx --no -- commitlint --edit ${1}"
