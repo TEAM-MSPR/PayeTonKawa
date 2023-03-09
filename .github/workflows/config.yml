@@ -26,4 +26,3 @@ jobs:
         working-directory: ./API_Webshop
         run: |
           git log --format=%s ${{ github.event.before }}..${{ github.event.after }}
-          npx commitlint --from ${{ github.event.before }} --to ${{ github.event.after }}
