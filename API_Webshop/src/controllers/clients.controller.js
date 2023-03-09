@@ -1,12 +1,11 @@
 const { Pool, Query } = require('pg');
-// commentaire test
 const pool = new Pool({
     host: 'bgjtis2ivq0a1fe0ahiy-postgresql.services.clever-cloud.com',
     user: 'ubmbdses5wpeioit8co1',
     password: 'W8uDI19fylWgm1lDjQrDjLhKYhO83U',
     database: 'bgjtis2ivq0a1fe0ahiy',
     port: '5035'
-}) //test
+})
 
 const setClients = async (req, res) => {
     const { id, nom, prenom, mail, pseudo, telephone } = req.body;
