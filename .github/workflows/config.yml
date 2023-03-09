@@ -21,7 +21,7 @@ jobs:
       - name: active les hooks
         run: npx husky install
       - name: Ajout script
-        run: npm set-script prepare "husky install"
+        run: npm run-script prepare "husky install"
       - name: Install dependencies
         working-directory: ./API_Webshop
         run: npm install
