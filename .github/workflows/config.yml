@@ -20,10 +20,8 @@ jobs:
         working-directory: ./API_Webshop
         run: npm install
       - name: Install commitlint
-        working-directory: ./API_Webshop
         run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
       - name: Lint commits
-        working-directory: ./API_Webshop
         run: |
           git log --format=%s ${{ github.event.before }}..${{ github.event.after }}
           npx commitlint --from ${{ github.event.before }} --to ${{ github.event.after }}
