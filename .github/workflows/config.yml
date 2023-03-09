@@ -1,46 +1,28 @@
-name: GitFlow Workflow
+name: Lint commits on push
 
 on:
   push:
     branches:
       - dev
       - main
+  pull_request:
+    branches:
+      - dev
+      - main
 
 jobs:
-  build:
+  lint-commits:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Install dependencies
-        working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
+        working-directory: ./API_Webshop
         run: npm install
-
-      - name: Build app
-        working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
-        run: npm run build
-
-      - name: Lint code
-        working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
-        run: npm run lint
-
-      - name: Test code
-        working-directory: ./API_Webshop # Permet de spécifier le répertoire de travail
-        run: npm test
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2 # Utilise l'action upload-artifact pour télécharger l'artefact de construction (ici le dossier src) sur le serveur GitHub
-        with:
-          name: build # Spécifie le nom de l'artefact qu'on télécharge
-          path: src #  Spécifie le chemin de l'artefact qu'on télécharge
-
-      - name: Commit changes
+      - name: Install commitlint
+        working-directory: ./API_Webshop
+        run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
+      - name: Lint commits
+        working-directory: ./API_Webshop
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-          git add .
-          git commit -m "$(echo $GITHUB_SHA | cut -c 1-8) - $(git log --format=%B -n 1)"
-          git tag -a "$(echo $GITHUB_SHA | cut -c 1-8)" -m "$(git log --format=%B -n 1)"
-          git push --follow-tags
+          git log --format=%s ${{ github.event.before }}..${{ github.event.after }}
