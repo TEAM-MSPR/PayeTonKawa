@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const router = Router();
 
-const { setClients } = require('../controllers/clients.controller');
+const auth = require('../middleware/auth');
+const { setRevendeur } = require('../controllers/revendeurs.controller');
 
-router.post('/clients', setClients)
+router.post('/revendeurs', auth, setRevendeur)
 module.exports = router;
