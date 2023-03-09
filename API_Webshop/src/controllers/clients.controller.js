@@ -6,7 +6,7 @@ const pool = new Pool({
     password: 'W8uDI19fylWgm1lDjQrDjLhKYhO83U',
     database: 'bgjtis2ivq0a1fe0ahiy',
     port: '5035'
-})
+}) //test
 
 const setClients = async (req, res) => {
     const { id, nom, prenom, mail, pseudo, telephone } = req.body;
