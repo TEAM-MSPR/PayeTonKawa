@@ -21,7 +21,7 @@ jobs:
         run: npm install
       - name: Install husky
         working-directory: ./
-        run : npm install husky --save-dev
+        run : GIT_DIR=$(git rev-parse --git-dir) && npm install husky --save-dev
       - name: active les hooks
         run : npx husky install
       - name: Ajout script
