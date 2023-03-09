@@ -16,16 +16,5 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install husky
-        run: npm install husky --save-dev
-      - name: active les hooks
-        run: npx husky install
-      - name: Ajout script
-        run: npm run-script prepare
-      - name: Install dependencies
-        working-directory: ./API_Webshop
-        run: npm install
-      - name: Install commitlint
-        run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
       - name: Ajout hook
         run : npx husky add .husky/commit-msg  "npx --no -- commitlint --edit ${1}"
