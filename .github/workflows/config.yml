@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install commitlint
+        run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
       - name: Check if Husky is installed
         id: husky-check
         run: echo ::set-output name=installed::$(npm list --depth=0 | grep husky)
@@ -26,7 +28,5 @@ jobs:
         run: npx husky install
       - name: Ajout script
         run: npm run-script prepare
-      - name: Install commitlint
-        run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
       - name: Ajout hook
         run : npx husky add .husky/commit-msg  "npx --no -- commitlint --edit ${1}"
