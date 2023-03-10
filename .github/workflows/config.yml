@@ -1,4 +1,4 @@
-name: Lint commits on push
+name: Build and Test Lint commits
 
 on:
   push:
@@ -11,8 +11,46 @@ on:
       - main
 
 jobs:
-  lint-commits:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
+      - name: Install commitlint
+        run: npm install @commitlint/cli @commitlint/config-conventional --save-dev
+      - name: Check if Husky is installed
+        id: husky-check
+        run: echo ::set-output name=installed::$(npm list --depth=0 | grep husky)
+      - name: Install Husky
+        if: steps.husky-check.outputs.installed == ''
+        run: npm install husky --save-dev
+      - name: active les hooks
+        run: npx husky install
+      - name: Ajout script
+        run: npm run-script prepare
+      - name: Ajout hook
+        run: npx husky add .husky/commit-msg  "npx --no -- commitlint --edit ${1}"
+      - name: Test
+        run: npm test
+      - name: Fast-Forward Merge
+        if: success()
+        run: |
+          git config --global user.email "quentin.quero22@gmail.com"
+          git config --global user.name "QuentinQ22"
+          git fetch --all
+          git checkout main
+          git pull
+          git merge origin/dev --no-edit
+          git push origin
+
+      - name: Rejected Branch
+        if: failure()
+        run: |
+          git config --global user.email "quentin.quero22@gmail.com"
+          git config --global user.name "QuentinQ22"
+          git checkout rejected
+          git add .
+          git commit -m "ON FAIL"
+          git push --set-upstream origin rejected_${GITHUB_RUN_NUMBER}
+          git checkout dev
+          git reset --hard HEAD^
