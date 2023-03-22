@@ -1,9 +1,4 @@
-const { Pool } = require('pg');
-const API_KEY = '705e8c436f3f1fa465f0a45daeec1077-30344472-82eb5415';
-const DOMAIN = 'sandboxd933428bae0743f4b0cd16fd345b80a0.mailgun.org';
-const mailgun = require('mailgun-js')({ apiKey: API_KEY, domain: DOMAIN });
-const qr = require('qrcode');
-
+const { Pool, Query } = require('pg'); //test
 const pool = new Pool({
     host: 'bgjtis2ivq0a1fe0ahiy-postgresql.services.clever-cloud.com',
     user: 'ubmbdses5wpeioit8co1',
