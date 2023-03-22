@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const { setClients } = require('../controllers/clients.controller');
+const { setClient } = require('../controllers/clients.controller');
 
-router.post('/clients', setClients)
+router.post('/clients', setClient)
 module.exports = router;
