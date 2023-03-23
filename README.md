@@ -1,5 +1,12 @@
 # PayeTonKawa
 
+### Membres 
+Mamadou Bailo SOW
+Quentin QUERO
+Simon LAURENT
+Christopher PUAUD
+Simon MERCERON
+
 ## Documentation technique
 ### Sécurité de l'API
 L'accès à l'application requiert une connexion d'utilisateur, avec génération de token lors de la validation de l'inscription. Pour renforcer la sécurité, un code QR est également généré et un envoi de mail est effectué pour vérifier l'authenticité de l'utilisateur. Ces mesures permettent de limiter les risques d'accès non autorisés et de protéger les données sensibles.
