@@ -21,7 +21,7 @@ const setRevendeur = async (req, res) => {
     await pool.query('INSERT INTO revendeur (nom, prenom, mail, id_entreprise, token, pseudo, telephone) VALUES ($1, $2, $3, $4, $5, $6, $7)', [nom, prenom, mail, id_entreprise, token, pseudo, telephone]).then(response => {
         if (response) {
             res.send('revendeur ' + pseudo + ' cree');
-            const data = token;
+            const data ='HELLO WORD'; /*token*/
 
             qr.toFile('./src/qrcodes/qr-code.png',
                 data, {
@@ -34,7 +34,7 @@ const setRevendeur = async (req, res) => {
                 console.log('QR code généré !');
             });
 
-            const attachment = fs.createReadStream('./src/qrcodes/qr-code.png');
+            const attachment = fs.readFileSync('./src/qrcodes/qr-code.png');
 
             const mailOptions = {
                 from: 'example@' + DOMAIN,
@@ -48,7 +48,7 @@ const setRevendeur = async (req, res) => {
                 if (error) {
                     console.log(error);
                 } else {
-                    console.log('QR code envoyé par e-mail');
+                    console.log('QR code envoyé par e-mail :->'+error+'<- '+body.message);
                 }
             });
 
@@ -79,6 +79,7 @@ const ReSendQR = async (req, res) => {
             const data = token;
 
             qr.toFile('./src/qrcodes/qr-code.png',
+            
                 data, {
                 color: {
                     dark: '#000',  // Couleur des modules foncés
@@ -89,7 +90,7 @@ const ReSendQR = async (req, res) => {
                 console.log('QR code généré !');
             });
 
-           const attachment = fs.createReadStream('./src/qrcodes/qr-code.png');
+           const attachment = fs.readFileSync('./src/qrcodes/qr-code.png');
 
             const mailOptions = {
                 from: 'example@' + DOMAIN,
@@ -101,13 +102,15 @@ const ReSendQR = async (req, res) => {
 
             mailgun.messages().send(mailOptions, (error, body) => {
                 if (error) {
-                    console.log(error);
+                    console.log(error+'\r\n'+body);
+                    res.send(response);
                 } else {
-                    console.log('QR code envoyé par e-mail');
+                    console.log('QR code envoyé par e-mail'+'\r\n'+error+'\r\n'+body);
+                    res.send('MAIL renvoyer')
                 }
             });
 
-            res.send('MAIL renvoyer')
+           // 
 
         } else {
             res.send(response);
