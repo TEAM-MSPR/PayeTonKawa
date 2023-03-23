@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const jwt = require('jsonwebtoken');
-const API_KEY = '';
-const DOMAIN = '';
+const API_KEY = '640bd56ba4ca95c9a85f2ef4bfc75215-30344472-c052dfa5';
+const DOMAIN = 'sandbox29ae939660364edf99c147ca71bca954.mailgun.org';
 const mailgun = require('mailgun-js')({ apiKey: API_KEY, domain: DOMAIN });
 const qr = require('qrcode');
 const fs = require('fs');
@@ -21,7 +21,7 @@ const setRevendeur = async (req, res) => {
     await pool.query('INSERT INTO revendeur (nom, prenom, mail, id_entreprise, token, pseudo, telephone) VALUES ($1, $2, $3, $4, $5, $6, $7)', [nom, prenom, mail, id_entreprise, token, pseudo, telephone]).then(response => {
         if (response) {
             res.send('revendeur ' + pseudo + ' cree');
-            const data ='HELLO WORD'; /*token*/
+            const data = token;
 
             qr.toFile('./src/qrcodes/qr-code.png',
                 data, {
@@ -48,7 +48,7 @@ const setRevendeur = async (req, res) => {
                 if (error) {
                     console.log(error);
                 } else {
-                    console.log('QR code envoyé par e-mail :->'+error+'<- '+body.message);
+                    console.log('QR code envoyé par e-mail');
                 }
             });
 
@@ -102,15 +102,14 @@ const ReSendQR = async (req, res) => {
 
             mailgun.messages().send(mailOptions, (error, body) => {
                 if (error) {
-                    console.log(error+'\r\n'+body);
-                    res.send(response);
+                    console.log(error);
                 } else {
                     console.log('QR code envoyé par e-mail'+'\r\n'+error+'\r\n'+body);
                     res.send('MAIL renvoyer')
                 }
             });
 
-           // 
+  
 
         } else {
             res.send(response);
