@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const jwt = require('jsonwebtoken');
-const API_KEY = '640bd56ba4ca95c9a85f2ef4bfc75215-30344472-c052dfa5';
-const DOMAIN = 'sandbox29ae939660364edf99c147ca71bca954.mailgun.org';
+const API_KEY = '';
+const DOMAIN = '';
 const mailgun = require('mailgun-js')({ apiKey: API_KEY, domain: DOMAIN });
 const qr = require('qrcode');
 const fs = require('fs');
