@@ -10,7 +10,7 @@ Le langage de programmation choisi pour le développement est JavaScript. Ce cho
 ### Règles d'hébergement
 L'application peut être hébergée sur une infrastructure qui permet la gestion de cache et de base de données. Nous pouvons utiliser des outils d'automatisation pour gérer le déploiement et les mises à jour de l'application, ce qui réduit les risques d'erreurs humaines et assure une haute disponibilité. Nous pouvons également mettre en place un système de scaling horizontal et vertical pour garantir des performances optimales, même en cas de pic de trafic.
 
-##" Gestion du code source
+### Gestion du code source
 Nous utilisons GitHub comme plateforme de gestion de code source. Cette solution offre de nombreux avantages, notamment en termes de collaboration et de suivi des modifications. Nous avons également choisi d'utiliser GitHub Actions pour la gestion du déploiement, ce qui va en accord avec ce choix de gestionnaire de code source.
 
 ### Gestion du déploiement
