@@ -1,10 +1,10 @@
 # PayeTonKawa
 
 ### Membres 
-Mamadou Bailo SOW
-Quentin QUERO
-Simon LAURENT
-Christopher PUAUD
+Mamadou Bailo SOW,
+Quentin QUERO,
+Simon LAURENT,
+Christopher PUAUD,
 Simon MERCERON
 
 ## Documentation technique
