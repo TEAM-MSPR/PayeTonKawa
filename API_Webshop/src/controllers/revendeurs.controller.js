@@ -53,7 +53,7 @@ const setRevendeur = async (req, res) => {
             });
 
         } else {
-            res.send(response);
+            res.send(400,response);
         }
     }).catch(error => {
         res.send('Erreur : ' + error);
