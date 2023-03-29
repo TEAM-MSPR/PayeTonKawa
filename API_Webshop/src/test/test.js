@@ -1,58 +1,123 @@
-const { test } = require('picomatch');
 const request = require('supertest');
 const app = require('../index');
 
+describe('Revendeurs', () => {
+  let token;
 
-describe('POST /revendeurs', function() {
-    it('responds with the created user', function(done) {
-      const userData = {
-        nom: 'Doe',
-        prenom: 'John',
-        mail: 'john.doe@example.com',
-        pseudo: 'john.doe',
-        telephone: '+1-555-555-5555',
-        id_entreprise: "b0004b72-be52-11ed-a44d-cecd02b63a45"
-      };
-
-      request(app)
-      .post('/revendeurs')
-      .send(userData)
-      .expect('Content-Type', /json/)
-      .expect(201)
-      .end(function(err, res) {
-        if (err) return done(err);
-        expect(res.body.name).to.equal(userData.name);
-        expect(res.body.email).to.equal(userData.email);
+  beforeAll((done) => {
+    request(app)
+      .post('/login')
+      .send({
+        email: 'john.doe@example.com',
+        password: 'password'
+      })
+      .end((err, response) => {
+        token = response.body.token; // récupérer le token pour les requêtes authentifiées
         done();
       });
   });
 
-/*
+  describe('POST /revendeurs', () => {
+    it('devrait ajouter un revendeur', async () => {
+      const response = await request(app)
+        .post('/revendeurs')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          nom: 'John Doe',
+          email: 'john.doe@example.com'
+        });
+      expect(response.status).toBe(201);
+      expect(response.body.nom).toBe('John Doe');
+      expect(response.body.email).toBe('john.doe@example.com');
+    });
 
-describe('POST /revendeurs', () => {
-  it('should create a new client', async () => {
-    const res = await request(app)
-      .post('/revendeurs')
-      .send({
-        nom: 'Doe',
-        prenom: 'John',
-        mail: 'john.doe@example.com',
-        pseudo: 'john.doe',
-        telephone: '+1-555-555-5555',
-        id_entreprise: "b0004b72-be52-11ed-a44d-cecd02b63a45"
-      })
-      .expect('Content-Type', /json/)
-      .expect(200, { message: 'revendeur john.doe cree' }, done);
+    it('devrait retourner une erreur 401 si non authentifié', async () => {
+      const response = await request(app)
+        .post('/revendeurs')
+        .send({
+          nom: 'John Doe',
+          email: 'john.doe@example.com'
+        });
+      expect(response.status).toBe(401);
+    });
   });
 
-  it('should return an error if missing required fields', async () => {
-    const res = await request(app).post('/revendeurs').send({
-      nom: 'Doe',
-      prenom: 'John',
-      mail: 'john.doe@example.com',
-      telephone: '+1-555-555-5555'
-    })
-    
-    .expect(200, { message: 'revendeur john.doe cree' }, done);
-  });*/
+  describe('GET /revendeurs', () => {
+    it('devrait retourner la liste des revendeurs', async () => {
+      const response = await request(app)
+        .get('/revendeurs')
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).toBe(200);
+      expect(response.body).toBeInstanceOf(Array);
+      expect(response.body.length).toBeGreaterThan(0);
+    });
+
+    it('devrait retourner une erreur 401 si non authentifié', async () => {
+      const response = await request(app)
+        .get('/revendeurs');
+      expect(response.status).toBe(401);
+    });
+
+    it('devrait retourner une erreur 404 si aucun revendeur trouvé', async () => {
+        const response = await request(app)
+            .get('/revendeurs')
+            .set('Authorization', `Bearer ${token}`);
+        expect(response.status).toBe(404);
+    });
+  });
+
+    describe('GET /revendeurs/:id', () => {
+        it('devrait retourner un revendeur', async () => {
+            const response = await request(app)
+                .get('/revendeurs/1')
+                .set('Authorization', `Bearer ${token}`);
+            expect(response.status).toBe(200);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body.nom).toBe('John Doe');
+            expect(response.body.email).toBe('john.doe@example.com');
+        });
+    });
+
+    describe('PUT /revendeurs/:id', () => {
+        it('devrait modifier un revendeur', async () => {
+            const response = await request(app)
+                .put('/revendeurs/1')
+                .set('Authorization', `Bearer ${token}`)
+                .send({
+                    nom: 'Jane Doe',
+                    email: 'john.doe@example.com'
+                });
+            expect(response.status).toBe(200);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body.nom).toBe('Jane Doe');
+            expect(response.body.email).toBe('john.doe@example.com');
+        });
+
+        it('devrait retourner une erreur 404 si aucun revendeur trouvé', async () => {
+            const response = await request(app)
+                .put('/revendeurs/0')
+                .set('Authorization', `Bearer ${token}`)
+                .send({
+                    nom: 'Jane Doe',
+                    email: 'john.doe@example.com'
+                });
+            expect(response.status).toBe(404);
+        });
+    });
+
+    describe('DELETE /revendeurs/:id', () => {
+        it('devrait supprimer un revendeur', async () => {
+            const response = await request(app)
+                .delete('/revendeurs/1')
+                .set('Authorization', `Bearer ${token}`);
+            expect(response.status).toBe(200);
+        });
+
+        it('devrait retourner une erreur 404 si aucun revendeur trouvé', async () => {
+            const response = await request(app)
+                .delete('/revendeurs/0')
+                .set('Authorization', `Bearer ${token}`);
+            expect(response.status).toBe(404);
+        });
+    });
 });
