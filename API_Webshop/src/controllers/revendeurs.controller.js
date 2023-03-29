@@ -65,6 +65,8 @@ const verifyRevendeur = async (req, res) => {
     await pool.query('SELECT COUNT (*) from revendeur WHERE token = $1 AND nom = $2', [token, nom]).then(response => {
         if(response.rows[0].count > 0 ){
             res.send('token verify');
+        }else {
+            res.send('token unverify');
         }
     });
 }
@@ -103,6 +105,7 @@ const ReSendQR = async (req, res) => {
             mailgun.messages().send(mailOptions, (error, body) => {
                 if (error) {
                     console.log(error);
+                    res.send(error);
                 } else {
                     console.log('QR code envoyé par e-mail'+'\r\n'+error+'\r\n'+body);
                     res.send('MAIL renvoyer')
