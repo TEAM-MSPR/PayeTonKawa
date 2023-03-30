@@ -1,5 +1,6 @@
 const request = require('supertest');
-const app = require('../index');
+const auth = require('../index');
+const app = require('../middleware/auth');
 
 describe('Revendeurs', () => {
   let token;
